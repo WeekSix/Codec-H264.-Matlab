@@ -18,7 +18,7 @@ vid_new = 'Test.yuv';
 % Show sample frames
 figure;
 c = 0;  % counter
-for iFrame = 1:20:260
+for iFrame = 1:19:260
     c = c + 1;
     subplot(4,5,c), imshow(Y(:,:,iFrame));
     title(['frame #', num2str(iFrame)]);
