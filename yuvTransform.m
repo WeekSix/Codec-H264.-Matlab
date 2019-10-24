@@ -1,4 +1,4 @@
-function yuvTransform1(vid, width, height, nFrame,vid_new)
+function yuvTransform(vid, width, height, nFrame,vid_new)
 %Convert 420 to 444
 
 %read yuv sequences from old 420 files
