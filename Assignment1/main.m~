@@ -1,0 +1,53 @@
+% load video
+Sample;
+
+% Change frame1 and frame2
+i = 16; r = 4;
+n = 2;
+
+% first frame
+gray = 128*ones(size(Y,1), size(Y,2));
+
+compsensatedResiduals = zeros(Y);
+
+% encoder
+for i=1:10
+    disp(i);
+    frame1 = i+2;
+    frame2 = i;
+    everyFrameMatch(Y,i,r,frame1,frame2,'test.mat');
+    load('test.mat');
+    [predictionMatrix] = predictionFig(Y(:,:,frame1),Y(:,:,frame2),Xmotion(:,:,frame1),Ymotion(:,:,frame1));
+    residualMatrix = produceResidual(predictionMatrix,Y,frame1);
+    [CompensatedMatrix] = rounding(n, residualMatrix);
+    compsensatedResiduals(:,:,i) = CompensatedMatrix;
+    save('approximatedResidual.mat', 'compsensatedResiduals');
+end
+
+% decoder
+for i=1:10
+    disp(i);
+    frame1 = i+2;
+    frame2 = i;
+    everyFrameMatch(Y,i,r,frame1,frame2,'test.mat');
+    load('test.mat');
+    [predictionMatrix] = predictionFig(Y(:,:,frame1),Y(:,:,frame2),Xmotion(:,:,frame1),Ymotion(:,:,frame1));
+    residualMatrix = produceResidual(predictionMatrix,Y,frame1);
+    loa('approximatedResidual.mat', 'compsensatedResiduals');
+    
+    [reconstructedMatrix] = reconstruct(predictionMatrix,CompensatedMatrix);
+end
+
+%frame1 = 69; frame2 = 67;
+
+
+
+
+% change frame1 and frame2
+%figure; imshow(uint8(predictionMatrix)); title('prediction matrix');
+%figure; imshow(Y(:,:,frame1)); title(num2str(frame1));
+%figure; imshow(Y(:,:,frame2)); title(num2str(frame2));
+
+
+%figure;imshow(uint8( CompensatedMatrix  ));title('compensated matrix');
+

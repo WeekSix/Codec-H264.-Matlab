@@ -1,0 +1,7 @@
+function [sad] = Compare2BlockChnlAndOutputSAD(fig1,fig2)
+%compare channels of two blocks
+%   fig1, fig2: i*i;
+
+sad = sum(sum(abs(fig1 - fig2)));
+
+end
