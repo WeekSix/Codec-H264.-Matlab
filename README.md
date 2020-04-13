@@ -1,3 +1,6 @@
 # ECE1783Fall2019
-New due date for A1:
-    Nov 2nd
+Codec H264. System by Matlab
+
+Part 1.
+Basic computation blocks for Encoder/Decoder
+
